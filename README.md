@@ -1,4 +1,4 @@
-This app was b compatible for only android phone To get started :
+This app was  built on an IOS  phone, to get started follow the instruction below :
 
   * Dowload and install any android emulator,You can try geny motion it is easy to set up
 

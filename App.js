@@ -17,13 +17,26 @@ export default class Todo extends React.Component {
     ]
   }
 
-  add = () => {
+  add = (text) => {
+    
+    let notEmpty = text.trim().length > 0;
 
+    if (notEmpty) {
+     
+      this.setState(
+        prevState => {
+          let { data } = prevState;
+          return {
+            data: data.concat(text),
+            text: ""
+          };
+        }
+      );
+    }
   }
 
-  remove = i => {
-    console.log('djhhjf')
-    console.log(i)
+  remove = (i) => {
+  
     this.setState(
       prevState => {
         let data = prevState.data.slice();
@@ -35,20 +48,22 @@ export default class Todo extends React.Component {
     );
 
   }
+  
   // updateState = 
-  showform = () => {
+  showForm = () => {
 
-    AlertIOS.alert(
-      'Sync Complete',
-      'All your data are belong to us.'
+    AlertIOS.prompt(
+      'Enter  Text',
+      null,
+      text =>  this.add(text)
     );
+  
   }
 
 
 
   render() {
 
-    console.log(this.state.data)
     return (
 
       <Container style={{ flex: 1 }}>
@@ -99,7 +114,7 @@ export default class Todo extends React.Component {
         <View style={{ alignItems: 'center', justifyContent: 'center' }} >
           <TouchableOpacity style={{ backgroundColor: '#32CD32', alignItems: 'center', justifyContent: 'center', padding: 20, borderRadius: 100 }}
             onPress={() =>
-              this.showform()
+              this.showForm()
             }>
             >
             <FontAwesome name="plus" size={20} />

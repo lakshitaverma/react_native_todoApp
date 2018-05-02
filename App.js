@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Button, TouchableOpacity, Dimensions, ScrollView, Animated, AlertIOS, FlatList } from 'react-native';
 import { Container, Header, Title, Content, Icon, button, Card, CardItem, Text, Body, Left, Right, IconNB, Footer } from "native-base";
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
+import moment from 'moment';
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
@@ -29,8 +31,7 @@ export default class Todo extends React.Component {
         data.splice(i, 1);
 
         return { data };
-      },
-      // () => Tasks.save(this.state.data)
+      }
     );
 
   }
@@ -53,14 +54,14 @@ export default class Todo extends React.Component {
       <Container style={{ flex: 1 }}>
         <Header>
           <Left>
-            <Title>12 Jan 2016</Title>
+            <Title>{moment().format('MMMM Do YYYY')}</Title>
           </Left>
           <Body>
 
           </Body>
           <Right>
             <Body>
-              <Title>Tuesday</Title>
+              <Title>{moment().format('dddd')}</Title>
             </Body>
           </Right>
         </Header>
@@ -72,7 +73,7 @@ export default class Todo extends React.Component {
 
 
               <Card key={index}>
-                <CardItem style={{ height: 50 }}>
+                <CardItem  key={index} style={{ height: 50 }}>
                   <Body>
                     <Text >
                       {item}
@@ -89,6 +90,7 @@ export default class Todo extends React.Component {
               </Card>
 
             }
+            keyExtractor={item => item.toString()}
 
           />
 
@@ -100,7 +102,6 @@ export default class Todo extends React.Component {
               this.showform()
             }>
             >
-
             <FontAwesome name="plus" size={20} />
 
           </TouchableOpacity>

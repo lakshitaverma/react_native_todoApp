@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Button, TouchableOpacity, Dimensions, ScrollView, Animated, AlertIOS } from 'react-native';
+import { StyleSheet, View, Button, TouchableOpacity, Dimensions, ScrollView, Animated, AlertIOS, FlatList } from 'react-native';
 import { Container, Header, Title, Content, Icon, button, Card, CardItem, Text, Body, Left, Right, IconNB, Footer } from "native-base";
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons'
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
 
-export default class CardHeaderFooterExample extends React.Component {
+export default class Todo extends React.Component {
 
   state = {
     text: '',
@@ -19,43 +19,34 @@ export default class CardHeaderFooterExample extends React.Component {
 
   }
 
-  remove = () => {
+  remove = i => {
+    console.log('djhhjf')
+    console.log(i)
+    this.setState(
+      prevState => {
+        let data = prevState.data.slice();
+
+        data.splice(i, 1);
+
+        return { data };
+      },
+      // () => Tasks.save(this.state.data)
+    );
 
   }
+  // updateState = 
   showform = () => {
 
-    AlertIOS.prompt(
-      'Enter  Text',
-      null,
-      text => this.setState({ text })//console.log("You entered "+text)
+    AlertIOS.alert(
+      'Sync Complete',
+      'All your data are belong to us.'
     );
   }
 
-  renderList = (obj) => {
-
-    return (
-
-      <CardItem style={{ height: 50 }}>
-        <Body>
-          <Text>
-            Begin Promotional Phase
-        </Text>
-        </Body>
-        <Right>
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-            <FontAwesome name="minus" size={10} color='#32CD32' />
-          </TouchableOpacity >
-        </Right>
-      </CardItem>
-
-    )
-  }
 
 
   render() {
-    let data = [
-      'ade', 'bolu', 'shade'
-    ];
+
     console.log(this.state.data)
     return (
 
@@ -73,81 +64,34 @@ export default class CardHeaderFooterExample extends React.Component {
             </Body>
           </Right>
         </Header>
-        <Content > 
+        <Content >
 
-        {/* <Content > {
-          this.state.data.map((a, index) => {
-            <Card key={index}>
-              <CardItem style={{ height: 50 }}>
-                <Body>
-                  <Text>
-                    {a}
-                    Begin Promotional Phase
-                </Text>
-                </Body>
-                <Right>
-                  <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-                    <FontAwesome name="minus" size={10} color='#32CD32' />
-                  </TouchableOpacity >
-                </Right>
-              </CardItem>
-            </Card>
-          })
-        } */}
+          <FlatList
+            data={this.state.data}
+            renderItem={({ item, index }) =>
 
-          <Card >
-            <CardItem style={{ height: 50 }}>
-              <Body>
-                <Text>
-                  Begin Promotional Phase
-                </Text>
-              </Body>
-              <Right>
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-                  <FontAwesome name="minus" size={10} color='#32CD32' />
-                </TouchableOpacity >
-              </Right>
-            </CardItem>
 
-            <CardItem style={{ height: 50 }}>
-              <Body>
-                <Text>
-                  Begin Promotional Phase
-                </Text>
-              </Body>
-              <Right>
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-                  <FontAwesome name="minus" size={10} color='#32CD32' />
-                </TouchableOpacity >
-              </Right>
-            </CardItem>
+              <Card key={index}>
+                <CardItem style={{ height: 50 }}>
+                  <Body>
+                    <Text >
+                      {item}
+                    </Text>
+                  </Body>
+                  <Right>
+                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}
+                    onPress={() => this.remove(index)}
+                    >
+                      <FontAwesome name="minus" size={10} color='#32CD32' />
+                    </TouchableOpacity >
+                  </Right>
+                </CardItem>
+              </Card>
 
-            <CardItem style={{ height: 50 }}>
-              <Body>
-                <Text>
-                  Begin Promotional Phase
-                </Text>
-              </Body>
-              <Right>
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-                  <FontAwesome name="minus" size={10} color='#32CD32' />
-                </TouchableOpacity >
-              </Right>
-            </CardItem>
+            }
 
-            <CardItem style={{ height: 50 }}>
-              <Body>
-                <Text>
-                  Begin Promotional Phase
-                </Text>
-              </Body>
-              <Right>
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', padding: 5, borderRadius: 5, borderColor: '#32CD32' }}   >
-                  <FontAwesome name="minus" size={10} color='#32CD32' />
-                </TouchableOpacity >
-              </Right>
-            </CardItem>
-          </Card>
+          />
+
 
         </Content>
         <View style={{ alignItems: 'center', justifyContent: 'center' }} >

@@ -1,6 +1,6 @@
 This app was  built on an IOS  phone, to get started follow the instruction below :
 
-  * Dowload and install any android emulator,You can try geny motion it is easy to set up
+  * Dowload and install any emulator,You can try geny motion it is easy to set up  for Android or Xcode for IOS
 
   * Make sure you have nodejs installed on your system if not install
   * Download and install expo

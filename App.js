@@ -7,6 +7,8 @@ import moment from 'moment';
 import prompt from 'react-native-prompt-android';
 
 
+
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
@@ -25,12 +27,12 @@ export default class Todo extends React.Component {
 
   async componentWillMount() {
     await Expo.Font.loadAsync({
-    Roboto: require("native-base/Fonts/Roboto.ttf"),
-    Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-    Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Ionicons: require("native-base/Fonts/Ionicons.ttf")
     });
     this.setState({ loading: false });
-    }
+  }
 
   add = (text) => {
 
@@ -92,11 +94,10 @@ export default class Todo extends React.Component {
 
 
   render() {
-    
-    if (!!this.state.loading) {
-    return (<Expo.AppLoading />);
+    if (!this.state.loading) {
+      return <Expo.AppLoading />;
     }
-
+    
     return (
       <Container style={{ flex: 1 }}>
         <Header>
